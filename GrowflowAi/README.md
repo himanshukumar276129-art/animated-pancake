@@ -60,3 +60,23 @@ python app.py
 - Set `DATABASE_URL` to a PostgreSQL connection string in production.
 - Set `SUPABASE_URL` and `SUPABASE_KEY` so the authentication page can verify sign-ins and exchange them for GrowFlow sessions.
 - If you split frontend later, keep the `/api/*` routes on the Flask service and point the UI to that backend.
+
+## Vercel Deployment
+
+GrowFlow AI can run on Vercel as a Flask project from the repository root.
+
+1. Import this GitHub repo into Vercel.
+2. Keep the root directory as-is so Vercel sees `app.py`.
+3. Add the following environment variables in the Vercel dashboard:
+   - `SECRET_KEY`
+   - `JWT_SECRET_KEY`
+   - `DATABASE_URL` pointing to a managed PostgreSQL database for persistent data
+   - `SUPABASE_URL`
+   - `SUPABASE_KEY`
+   - `GROQ_API_KEY`
+   - `WHATSAPP_*` keys if you use WhatsApp messaging
+   - payment gateway keys if you enable live billing
+4. For shared rate limiting, set `RATELIMIT_STORAGE_URI` to Redis or Upstash. The default in-memory store is fine for local development but not ideal for production scale.
+5. If `DATABASE_URL` is missing on Vercel, the app falls back to an ephemeral SQLite database in the platform temp directory so preview deploys can boot, but that data will not persist between deployments or cold starts.
+
+The repo now includes a `vercel.json` file with Flask framework detection and bundle exclusions for local caches, the virtual environment, and the local SQLite file.

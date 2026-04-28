@@ -1,16 +1,30 @@
 import os
+import tempfile
 from pathlib import Path
 
 
 BASE_DIR = Path(__file__).resolve().parent
 
 
+def _resolve_database_url():
+    database_url = os.getenv("DATABASE_URL")
+    if database_url:
+        return database_url
+
+    if os.getenv("VERCEL") or os.getenv("VERCEL_ENV") or os.getenv("VERCEL_URL"):
+        return f"sqlite:///{(Path(tempfile.gettempdir()) / 'growflow.db').as_posix()}"
+
+    return f"sqlite:///{(BASE_DIR / 'growflow.db').as_posix()}"
+
+
 class Config:
     SECRET_KEY = os.getenv("SECRET_KEY", "growflow-dev-secret")
     JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY", "growflow-jwt-secret")
-    SQLALCHEMY_DATABASE_URI = os.getenv(
-        "DATABASE_URL",
-        f"sqlite:///{(BASE_DIR / 'growflow.db').as_posix()}",
+    SQLALCHEMY_DATABASE_URI = _resolve_database_url()
+    SQLALCHEMY_ENGINE_OPTIONS = (
+        {"connect_args": {"check_same_thread": False}}
+        if SQLALCHEMY_DATABASE_URI.startswith("sqlite")
+        else {}
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     JSON_SORT_KEYS = False
