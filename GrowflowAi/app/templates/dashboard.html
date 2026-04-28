@@ -1,0 +1,64 @@
+{% extends "app_shell.html" %}
+{% block page_content %}
+<div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+    <article class="metric-card">
+        <p class="metric-label">Today's Sales</p>
+        <p id="overview-sales" class="metric-value">&#8377;0</p>
+        <p class="metric-note">Paid invoices cleared today</p>
+    </article>
+    <article class="metric-card">
+        <p class="metric-label">Pending Payments</p>
+        <p id="overview-pending" class="metric-value">&#8377;0</p>
+        <p id="overview-pending-note" class="metric-note">0 invoices need follow-up</p>
+    </article>
+    <article class="metric-card">
+        <p class="metric-label">Active Customers</p>
+        <p id="overview-customers" class="metric-value">0</p>
+        <p class="metric-note">Ready for campaigns and reminders</p>
+    </article>
+    <article class="metric-card">
+        <p class="metric-label">Today's Attendance</p>
+        <p id="overview-attendance" class="metric-value">0 / 0</p>
+        <p class="metric-note">Present staff vs total employees</p>
+    </article>
+</div>
+
+<div class="grid gap-6 xl:grid-cols-[1.05fr_0.95fr]">
+    <article class="glass-card p-6">
+        <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div>
+                <p class="section-kicker">Primary Buttons</p>
+                <h2 class="text-2xl font-semibold">Open any business module directly.</h2>
+            </div>
+            <span id="overview-whatsapp-status" class="mini-chip">WhatsApp status pending</span>
+        </div>
+        <div class="mt-5 grid gap-4 md:grid-cols-2">
+            {% for item in app_pages if item.key not in ['dashboard', 'whatsapp-settings', 'whatsapp-dashboard'] %}
+            <a href="{{ item.route }}" class="template-btn">
+                <p class="template-title">{{ item.label }}</p>
+                <p class="template-copy">{{ item.description }}</p>
+            </a>
+            {% endfor %}
+        </div>
+    </article>
+
+    <article class="glass-card p-6">
+        <p class="section-kicker">Growth Chart</p>
+        <h2 class="text-2xl font-semibold">Last 7 days of billing activity</h2>
+        <div id="overview-growth-chart" class="chart-grid mt-6"></div>
+    </article>
+</div>
+
+<div class="grid gap-6 xl:grid-cols-[0.95fr_1.05fr]">
+    <article class="glass-card p-6">
+        <p class="section-kicker">Recent Activity</p>
+        <h2 class="text-2xl font-semibold">Live operational highlights</h2>
+        <div id="overview-activity-list" class="mt-5 space-y-3"></div>
+    </article>
+    <article class="glass-card p-6">
+        <p class="section-kicker">Recent Campaigns</p>
+        <h2 class="text-2xl font-semibold">Marketing and WhatsApp timeline</h2>
+        <div id="overview-marketing-list" class="mt-5 space-y-3"></div>
+    </article>
+</div>
+{% endblock %}

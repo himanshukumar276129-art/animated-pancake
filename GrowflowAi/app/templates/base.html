@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="application-name" content="GrowFlow AI">
+    <meta name="apple-mobile-web-app-title" content="GrowFlow AI">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#07120d">
+    <title>{% block title %}GrowFlow AI{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='img/growflow-logo.svg') }}">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='img/20851361-e614-4795-8051-7a6b75d3d2c3-removebg-preview.png') }}">
+    <link rel="manifest" href="{{ url_for('pages.manifest_webmanifest') }}">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ink: "#07120d",
+                        panel: "#0c1914",
+                        line: "#183428",
+                        glow: "#49f27a",
+                        mint: "#d7ffe4"
+                    },
+                    boxShadow: {
+                        neon: "0 0 0 1px rgba(73, 242, 122, 0.15), 0 18px 60px rgba(10, 22, 16, 0.45)"
+                    }
+                }
+            }
+        };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    {% block head %}{% endblock %}
+</head>
+<body
+    id="app-body"
+    class="min-h-screen overflow-x-hidden bg-ink text-white"
+    data-page="{{ body_page | default('base') }}"
+    data-auth-required="{{ 'true' if auth_required else 'false' }}"
+    data-supabase-url="{{ supabase_url | default('', true) }}"
+    data-supabase-key="{{ supabase_key | default('', true) }}"
+    data-supabase-enabled="{{ 'true' if supabase_enabled else 'false' }}"
+    >
+    <div id="app-background" class="fixed inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,_rgba(73,242,122,0.18),_transparent_34%),radial-gradient(circle_at_bottom_right,_rgba(73,242,122,0.08),_transparent_28%),linear-gradient(160deg,_#050c09,_#08140f_55%,_#06100c)]"></div>
+    <div id="toast" class="pointer-events-none fixed right-4 top-4 z-50 hidden min-w-[240px] rounded-2xl border border-glow/20 bg-panel/95 px-4 py-3 text-sm shadow-neon"></div>
+    <div id="pwa-banner" class="pointer-events-none fixed inset-x-4 bottom-4 z-50 hidden rounded-[24px] border border-white/10 bg-panel/95 px-4 py-3 text-sm text-white shadow-neon backdrop-blur-md" aria-live="polite" aria-atomic="true"></div>
+    <div id="upgrade-modal" class="fixed inset-0 z-[60] hidden items-center justify-center bg-black/70 px-4 py-6 backdrop-blur-sm">
+        <div class="w-full max-w-2xl rounded-[32px] border border-glow/20 bg-panel p-6 shadow-neon">
+            <div class="flex items-start justify-between gap-4">
+                <div>
+                    <p class="section-kicker">Pro Upgrade</p>
+                    <h2 id="upgrade-modal-title" class="font-display text-3xl text-white">Upgrade to GrowFlow AI Pro</h2>
+                    <p id="upgrade-modal-copy" class="mt-2 text-sm leading-6 text-white/70">Unlock live WhatsApp campaigns, AI tools, automation, and export features for Rs 200/month.</p>
+                </div>
+                <button id="upgrade-modal-close" type="button" class="action-btn border border-white/10 bg-white/5 text-white">Close</button>
+            </div>
+
+            <div class="mt-5 grid gap-4 md:grid-cols-2">
+                <div class="soft-panel">
+                    <p id="upgrade-modal-state" class="font-semibold text-white">Status unavailable</p>
+                    <p id="upgrade-modal-days" class="mt-2 text-sm text-white/60">Trial days tracked automatically.</p>
+                    <p id="upgrade-modal-note" class="mt-2 text-sm leading-6 text-white/60">Secure server-side checkout will open in a new tab.</p>
+                </div>
+                <div class="soft-panel">
+                    <p class="text-sm text-white/55">Pro pricing</p>
+                    <p id="upgrade-modal-amount" class="mt-2 text-4xl font-semibold text-white">Rs 200</p>
+                    <p id="upgrade-modal-discount" class="mt-2 text-sm text-white/65">No promo applied</p>
+                </div>
+            </div>
+
+            <div class="mt-5 grid gap-3 md:grid-cols-[1fr_auto]">
+                <input id="upgrade-modal-promo" type="text" class="field" placeholder="Promo code">
+                <button id="upgrade-modal-apply" type="button" class="action-btn border border-glow/20 bg-glow/10 text-glow">Apply promo</button>
+            </div>
+
+            <div class="mt-6 flex flex-wrap gap-3">
+                <button id="upgrade-modal-payment" type="button" class="action-btn bg-glow text-ink">Upgrade now</button>
+                <button id="upgrade-modal-close-secondary" type="button" class="action-btn border border-white/10 bg-white/5 text-white">Maybe later</button>
+            </div>
+        </div>
+    </div>
+    {% block content %}{% endblock %}
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/pwa.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

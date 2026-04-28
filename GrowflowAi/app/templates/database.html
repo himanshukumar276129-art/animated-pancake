@@ -1,0 +1,60 @@
+{% extends "app_shell.html" %}
+{% block page_content %}
+<div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+    <article class="metric-card">
+        <p class="metric-label">Customers</p>
+        <p id="database-customers" class="metric-value">0</p>
+        <p class="metric-note">Stored contact records</p>
+    </article>
+    <article class="metric-card">
+        <p class="metric-label">Employees</p>
+        <p id="database-employees" class="metric-value">0</p>
+        <p class="metric-note">Team rows in account</p>
+    </article>
+    <article class="metric-card">
+        <p class="metric-label">Invoices</p>
+        <p id="database-invoices" class="metric-value">0</p>
+        <p class="metric-note">Billing records available</p>
+    </article>
+    <article class="metric-card">
+        <p class="metric-label">API Keys</p>
+        <p id="database-api-keys" class="metric-value">0</p>
+        <p class="metric-note">Encrypted integration secrets</p>
+    </article>
+</div>
+
+<div class="grid gap-6 xl:grid-cols-[1fr_0.95fr]">
+    <article class="glass-card p-6">
+        <p class="section-kicker">Backup and Restore</p>
+        <h2 class="text-2xl font-semibold">Control your data safely</h2>
+        <div id="database-alert" class="mt-5 hidden rounded-2xl border px-4 py-3 text-sm"></div>
+        <div class="mt-5 space-y-4">
+            <div class="soft-panel">
+                <p class="font-semibold text-white">Exports</p>
+                <p class="mt-2 text-sm text-white/65">Download full JSON backup or CSV files for spreadsheet use.</p>
+                <div class="mt-4 flex flex-wrap gap-3">
+                    <button id="download-backup-button" type="button" class="action-btn bg-glow text-ink">Download Backup</button>
+                    <button id="download-csv-button" type="button" class="action-btn border border-white/10 bg-white/5 text-white">Download CSV Export</button>
+                </div>
+            </div>
+            <div class="soft-panel">
+                <p class="font-semibold text-white">Restore</p>
+                <textarea id="restore-backup-input" class="field mt-4" rows="9" placeholder='{"customers": [], "employees": [], "invoices": []}'></textarea>
+                <button id="restore-backup-button" type="button" class="action-btn mt-4 border border-glow/20 bg-glow/10 text-glow">Restore Backup</button>
+            </div>
+            <div class="soft-panel">
+                <p class="font-semibold text-white">Delete business data</p>
+                <p class="mt-2 text-sm text-white/65">This removes business data but keeps your account and login.</p>
+                <input id="delete-data-confirm" type="text" class="field mt-4" placeholder="Type DELETE to confirm">
+                <button id="delete-all-data-button" type="button" class="action-btn mt-4 border border-red-500/20 bg-red-950/30 text-red-100">Delete All Data</button>
+            </div>
+        </div>
+    </article>
+
+    <article class="glass-card p-6">
+        <p class="section-kicker">Database Summary</p>
+        <h2 class="text-2xl font-semibold">Account storage overview</h2>
+        <div id="database-summary-list" class="mt-5 space-y-3"></div>
+    </article>
+</div>
+{% endblock %}

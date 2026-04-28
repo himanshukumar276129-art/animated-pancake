@@ -1,0 +1,186 @@
+{% extends "base.html" %}
+{% block title %}GrowFlow AI | Multi-Page SaaS Workspace{% endblock %}
+{% block content %}
+<header class="mx-auto max-w-7xl px-6 py-6 lg:px-10">
+    <nav class="flex flex-col gap-4 rounded-full border border-white/10 bg-white/5 px-5 py-3 backdrop-blur sm:flex-row sm:items-center sm:justify-between">
+        <a href="{{ url_for('pages.landing_page') }}" class="flex items-center gap-3">
+            <img src="{{ url_for('static', filename='img/20851361-e614-4795-8051-7a6b75d3d2c3-removebg-preview.png') }}" alt="GrowFlow AI" class="w-[52px]" loading="lazy">
+            <div class="hidden sm:block">
+                <p class="font-display text-lg text-white">GrowFlow AI</p>
+                <p class="text-xs text-white/55">Modern operating system for local business</p>
+            </div>
+        </a>
+        <div class="hidden items-center gap-6 text-sm text-white/70 md:flex">
+            <a href="#features" class="hover:text-white">Features</a>
+            <a href="#workspace" class="hover:text-white">Workspace</a>
+            <a href="#pricing" class="hover:text-white">Pricing</a>
+            <a href="#support" class="hover:text-white">Support</a>
+        </div>
+        <div class="flex flex-wrap items-center gap-3">
+            <a href="{{ url_for('pages.auth_page') }}" class="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:border-glow/40 hover:bg-white/10">
+                Login
+            </a>
+            <a href="{{ url_for('pages.auth_page') }}" class="rounded-full bg-glow px-5 py-2 text-sm font-semibold text-ink transition hover:brightness-110">
+                Start Free Trial
+            </a>
+        </div>
+    </nav>
+</header>
+
+<main class="mx-auto max-w-7xl px-6 pb-20 lg:px-10">
+    <section class="grid gap-8 py-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+        <div>
+            <div class="chip-row mb-5">
+                <span class="mini-chip">HTML + Tailwind + Flask</span>
+                <span class="mini-chip">Dedicated dashboard pages</span>
+                <span class="mini-chip">Built for local business owners</span>
+            </div>
+            <h1 class="max-w-4xl font-display text-4xl leading-none tracking-tight sm:text-5xl md:text-7xl">
+                Run sales, staff, WhatsApp, billing, and AI from one branded workspace.
+            </h1>
+            <p class="mt-6 hero-note">
+                GrowFlow AI gives every major function its own focused page while keeping one dark modern interface,
+                one sidebar, one navigation model, and one simple user journey.
+            </p>
+            <div class="mt-8 flex flex-wrap gap-4">
+                <a href="{{ url_for('pages.auth_page') }}" class="rounded-2xl bg-glow px-6 py-4 text-base font-semibold text-ink transition hover:brightness-110">
+                    Start Free Trial
+                </a>
+                <a href="{{ url_for('pages.auth_page') }}?mode=register" class="rounded-2xl border border-white/10 bg-white/5 px-6 py-4 text-base font-semibold text-white transition hover:border-glow/40 hover:bg-white/10">
+                    Create Account
+                </a>
+            </div>
+            <div class="mt-8 chip-row">
+                <span class="mini-chip">JWT authentication</span>
+                <span class="mini-chip">Encrypted API keys</span>
+                <span class="mini-chip">Backup and restore</span>
+            </div>
+        </div>
+
+        <div class="glass-card p-6">
+            <p class="section-kicker">Workspace Snapshot</p>
+            <h2 class="text-3xl font-semibold">A multi-page SaaS flow that stays easy to use.</h2>
+            <div class="mt-6 grid gap-3">
+                <div class="soft-panel">
+                    <p class="font-semibold text-white">Dashboard Overview</p>
+                    <p class="mt-2 text-sm text-white/65">Metrics, activity, and one-click links into every operating module.</p>
+                </div>
+                <div class="soft-panel">
+                    <p class="font-semibold text-white">Operations Pages</p>
+                    <p class="mt-2 text-sm text-white/65">Dedicated screens for employees, attendance, customers, billing, and database control.</p>
+                </div>
+                <div class="soft-panel">
+                    <p class="font-semibold text-white">Growth Pages</p>
+                    <p class="mt-2 text-sm text-white/65">WhatsApp campaigns, AI tools, analytics, subscriptions, and account settings.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="py-14">
+        <div class="mb-8 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+            <div>
+                <p class="section-kicker">Features</p>
+                <h2 class="section-title">Professional navigation with focused pages for every job.</h2>
+            </div>
+            <p class="max-w-xl text-sm text-white/62">
+                The interface stays consistent, but each page is tuned to one business workflow so it never feels overloaded.
+            </p>
+        </div>
+        <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            <article class="glass-card p-6">
+                <p class="text-lg font-semibold">Employee and Attendance</p>
+                <p class="mt-3 text-sm leading-6 text-white/65">Add staff, maintain records, mark attendance daily, and export structured logs.</p>
+            </article>
+            <article class="glass-card p-6">
+                <p class="text-lg font-semibold">Customer and Billing</p>
+                <p class="mt-3 text-sm leading-6 text-white/65">Manage contact lists, import records, issue invoices, and track payments clearly.</p>
+            </article>
+            <article class="glass-card p-6">
+                <p class="text-lg font-semibold">WhatsApp and AI</p>
+                <p class="mt-3 text-sm leading-6 text-white/65">Connect Meta APIs, run campaigns, and generate posters or captions from AI prompts.</p>
+            </article>
+            <article class="glass-card p-6">
+                <p class="text-lg font-semibold">Database and Security</p>
+                <p class="mt-3 text-sm leading-6 text-white/65">Use encrypted keys, JWT sessions, backup files, CSV exports, and safe restore workflows.</p>
+            </article>
+        </div>
+    </section>
+
+    <section id="workspace" class="py-14">
+        <div class="mb-8">
+            <p class="section-kicker">Workspace Pages</p>
+            <h2 class="section-title">Every major dashboard button opens a dedicated page.</h2>
+        </div>
+        <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            <a href="{{ url_for('pages.dashboard_page') }}" class="template-btn">
+                <p class="template-title">Dashboard Overview</p>
+                <p class="template-copy">Metrics, navigation cards, recent activity, and live status.</p>
+            </a>
+            <a href="{{ url_for('pages.employees_page') }}" class="template-btn">
+                <p class="template-title">Employee Management</p>
+                <p class="template-copy">Create, update, and remove staff records with quick editing.</p>
+            </a>
+            <a href="{{ url_for('pages.attendance_page') }}" class="template-btn">
+                <p class="template-title">Attendance System</p>
+                <p class="template-copy">Track daily presence, filter by date, and export logs.</p>
+            </a>
+            <a href="{{ url_for('pages.customers_page') }}" class="template-btn">
+                <p class="template-title">Customer Management</p>
+                <p class="template-copy">Store customers, import lists, and review purchase context.</p>
+            </a>
+            <a href="{{ url_for('pages.billing_page') }}" class="template-btn">
+                <p class="template-title">Billing & Payments</p>
+                <p class="template-copy">Generate invoices and manage payment state in one place.</p>
+            </a>
+            <a href="{{ url_for('pages.whatsapp_page') }}" class="template-btn">
+                <p class="template-title">WhatsApp Marketing</p>
+                <p class="template-copy">Bulk campaigns, templates, automation, and connection setup.</p>
+            </a>
+        </div>
+    </section>
+
+    <section id="pricing" class="grid gap-6 py-14 lg:grid-cols-2">
+        <article class="plan-card">
+            <p class="section-kicker">Free Plan</p>
+            <h3 class="text-3xl font-semibold">Start simple</h3>
+            <p class="mt-4 text-5xl font-display">Rs 0</p>
+            <p class="mt-2 text-sm text-white/60">For small teams getting organized</p>
+            <ul class="mt-6 space-y-3 text-sm text-white/70">
+                <li>Dashboard, staff, attendance, and customer management</li>
+                <li>Basic billing history and limited messaging usage</li>
+                <li>Help guides and secure account settings</li>
+            </ul>
+        </article>
+        <article class="plan-card is-featured">
+            <p class="section-kicker">Pro Plan</p>
+            <h3 class="text-3xl font-semibold">Automate growth</h3>
+            <p class="mt-4 text-5xl font-display">Rs 200</p>
+            <p class="mt-2 text-sm text-white/60">per month after the 7-day free trial</p>
+            <ul class="mt-6 space-y-3 text-sm text-white/70">
+                <li>Live WhatsApp automation and broadcast messaging</li>
+                <li>AI poster and campaign generation tools</li>
+                <li>API management, analytics, and data controls</li>
+            </ul>
+        </article>
+    </section>
+
+    <section id="support" class="grid gap-6 py-14 lg:grid-cols-3">
+        <article class="glass-card p-6">
+            <p class="section-kicker">Consistency</p>
+            <h3 class="text-2xl font-semibold">One brand across every page.</h3>
+            <p class="mt-4 text-sm leading-6 text-white/65">Dark modern interface, neon-green highlights, shared sidebar, breadcrumb navigation, and mobile-friendly layouts.</p>
+        </article>
+        <article class="glass-card p-6">
+            <p class="section-kicker">Performance</p>
+            <h3 class="text-2xl font-semibold">Focused loading and reusable UI.</h3>
+            <p class="mt-4 text-sm leading-6 text-white/65">Each page loads only the data it needs, while shared templates and scripts keep the app lean.</p>
+        </article>
+        <article class="glass-card p-6">
+            <p class="section-kicker">Support</p>
+            <h3 class="text-2xl font-semibold">Simple enough for non-technical owners.</h3>
+            <p class="mt-4 text-sm leading-6 text-white/65">Guided onboarding, support contacts, and clearly labeled actions make daily use straightforward.</p>
+        </article>
+    </section>
+</main>
+{% endblock %}

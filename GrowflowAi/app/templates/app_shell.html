@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% block title %}{{ page_title }}{% endblock %}
+{% block content %}
+<div class="app-shell min-h-screen lg:grid lg:grid-cols-[300px_1fr]">
+    <div id="shell-drawer-backdrop" class="shell-backdrop hidden lg:hidden"></div>
+    <aside id="shell-sidebar" class="shell-sidebar border-b border-white/5 bg-black/10 p-5 lg:border-b-0 lg:border-r lg:sticky lg:top-0 lg:h-screen lg:overflow-y-auto" data-shell-drawer>
+        <div class="shell-sidebar-inner">
+            <div class="glass-card p-5">
+                <div class="flex items-start justify-between gap-4">
+                    <a href="{{ url_for('pages.dashboard_page') }}" class="flex items-center gap-4">
+                        <img src="{{ url_for('static', filename='img/20851361-e614-4795-8051-7a6b75d3d2c3-removebg-preview.png') }}" alt="GrowFlow AI" class="w-[78px]" loading="lazy">
+                        <div>
+                            <p class="font-display text-xl text-white">GrowFlow AI</p>
+                            <p class="text-sm text-white/55">Local business growth operating system</p>
+                        </div>
+                    </a>
+                    <button id="shell-drawer-close" type="button" class="action-btn border border-white/10 bg-white/5 text-white lg:hidden">Close</button>
+                </div>
+                <p class="mt-4 text-sm leading-6 text-white/62">
+                    Dedicated pages for operations, sales, messaging, AI, and support with one consistent workspace.
+                </p>
+            </div>
+
+            <nav class="mt-6 grid gap-2">
+                {% for item in app_pages %}
+                <a href="{{ item.route }}" class="sidebar-link {% if item.key == body_page %}is-active{% endif %}">
+                    <div>
+                        <p class="font-semibold text-white">{{ item.label }}</p>
+                        <p class="mt-1 text-xs text-white/55">{{ item.eyebrow }}</p>
+                    </div>
+                    <span class="mini-chip">{{ item.badges[0] }}</span>
+                </a>
+                {% endfor %}
+            </nav>
+
+            <div class="mt-6 rounded-[28px] border border-glow/15 bg-glow/10 p-5">
+                <p class="text-sm font-medium text-glow">Fast support path</p>
+                <p class="mt-2 text-sm leading-6 text-white/72">
+                    Need onboarding or recovery help? Jump to the support desk or contact {{ support_email }}.
+                </p>
+                <a href="{{ url_for('pages.support_page') }}" class="action-btn mt-4 inline-flex border border-glow/20 bg-black/20 text-glow">
+                    Open Help & Support
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <main class="p-4 sm:p-5 md:p-8">
+        <div class="shell-mobile-toolbar lg:hidden">
+            <button id="shell-drawer-open" type="button" class="action-btn border border-white/10 bg-white/5 text-white">Menu</button>
+            <div class="flex items-center gap-2">
+                <button type="button" data-pwa-action="install" hidden class="action-btn border border-glow/20 bg-glow/10 text-glow">Install app</button>
+                <button type="button" data-pwa-action="notifications" class="action-btn border border-white/10 bg-white/5 text-white">Enable alerts</button>
+            </div>
+        </div>
+
+        <header class="glass-card p-6">
+            <div class="flex flex-col gap-6 xl:flex-row xl:items-start xl:justify-between">
+                <div>
+                    <nav class="flex flex-wrap items-center gap-2 overflow-x-auto text-sm text-white/48">
+                        {% for crumb in breadcrumbs %}
+                        {% if loop.last %}
+                        <span class="mini-chip">{{ crumb.label }}</span>
+                        {% else %}
+                        <a href="{{ crumb.href }}" class="hover:text-white">{{ crumb.label }}</a>
+                        <span>/</span>
+                        {% endif %}
+                        {% endfor %}
+                    </nav>
+                    <p class="section-kicker mt-5">{{ current_page.eyebrow }}</p>
+                    <h1 class="font-display text-4xl leading-none tracking-tight md:text-5xl">{{ current_page.label }}</h1>
+                    <p class="mt-4 max-w-3xl text-sm leading-7 text-white/68 md:text-base">
+                        {{ current_page.description }}
+                    </p>
+                </div>
+
+                <div class="w-full max-w-md">
+                    <div class="chip-row justify-start xl:justify-end">
+                        {% for badge in current_page.badges %}
+                        <span class="mini-chip">{{ badge }}</span>
+                        {% endfor %}
+                        <span class="mini-chip" data-pwa-connection>Online</span>
+                    </div>
+                    <div class="mt-4 grid gap-3 sm:grid-cols-2">
+                        <div class="soft-panel">
+                            <p class="text-sm text-white/55">Current session</p>
+                            <p id="shell-user-name" class="mt-2 font-semibold text-white">GrowFlow Workspace</p>
+                            <p id="shell-user-email" class="mt-1 text-sm text-white/55">JWT-secured access</p>
+                        </div>
+                        <div class="soft-panel">
+                            <p class="text-sm text-white/55">Quick actions</p>
+                            <div class="mt-3 flex flex-wrap gap-3">
+                                <a href="{{ url_for('pages.dashboard_page') }}" class="action-btn border border-white/10 bg-white/5 text-white">Overview</a>
+                                <button type="button" data-pwa-action="install" hidden class="action-btn border border-glow/20 bg-glow/10 text-glow">Install app</button>
+                                <button type="button" data-pwa-action="notifications" class="action-btn border border-white/10 bg-white/5 text-white">Enable alerts</button>
+                                <button id="logout-button" type="button" class="action-btn bg-glow text-ink">Logout</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div id="shell-subscription-banner" class="hidden"></div>
+
+        <section class="mt-6 space-y-6">
+            {% block page_content %}{% endblock %}
+        </section>
+    </main>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/app-shell.js') }}"></script>
+<script src="{{ url_for('static', filename='js/portal.js') }}"></script>
+{% block page_scripts %}{% endblock %}
+{% endblock %}

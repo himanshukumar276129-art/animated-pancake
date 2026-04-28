@@ -1,0 +1,83 @@
+{% extends "app_shell.html" %}
+{% block page_content %}
+<div class="grid gap-6 xl:grid-cols-[0.95fr_1.05fr]">
+    <div class="grid gap-6">
+        <article class="glass-card p-6">
+            <p class="section-kicker">Getting Started</p>
+            <h2 class="text-2xl font-semibold">Onboarding for local business teams</h2>
+            <div class="mt-5 steps-list">
+                <div class="step-row">
+                    <div class="step-number">1</div>
+                    <div class="soft-panel">
+                        <p class="font-semibold text-white">Log in and review the overview page</p>
+                        <p class="mt-2 text-sm text-white/65">Use the dashboard overview to jump into employees, customers, billing, or campaigns.</p>
+                    </div>
+                </div>
+                <div class="step-row">
+                    <div class="step-number">2</div>
+                    <div class="soft-panel">
+                        <p class="font-semibold text-white">Connect key integrations</p>
+                        <p class="mt-2 text-sm text-white/65">Save API keys, then verify WhatsApp if you want live campaign delivery.</p>
+                    </div>
+                </div>
+                <div class="step-row">
+                    <div class="step-number">3</div>
+                    <div class="soft-panel">
+                        <p class="font-semibold text-white">Protect and back up data</p>
+                        <p class="mt-2 text-sm text-white/65">Use database management for backups, exports, and restore workflows.</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="glass-card p-6">
+            <p class="section-kicker">FAQ</p>
+            <h2 class="text-2xl font-semibold">Common questions</h2>
+            <div class="mt-5 space-y-3">
+                <div class="soft-panel">
+                    <p class="font-semibold text-white">Do I need technical skills?</p>
+                    <p class="mt-2 text-sm text-white/65">No. Each page is focused on one task, with clear labels and guided actions.</p>
+                </div>
+                <div class="soft-panel">
+                    <p class="font-semibold text-white">Can I export data to spreadsheets?</p>
+                    <p class="mt-2 text-sm text-white/65">Yes. Attendance export and database CSV bundles are available in the workspace.</p>
+                </div>
+                <div class="soft-panel">
+                    <p class="font-semibold text-white">How do I restore my business data?</p>
+                    <p class="mt-2 text-sm text-white/65">Open Database Management, paste your GrowFlow backup JSON, and run restore.</p>
+                </div>
+            </div>
+        </article>
+    </div>
+
+    <div class="grid gap-6">
+        <article class="glass-card p-6">
+            <p class="section-kicker">Contact Support</p>
+            <h2 class="text-2xl font-semibold">Reach the GrowFlow team</h2>
+            <div class="mt-5 space-y-4 text-sm text-white/72">
+                <div class="soft-panel">
+                    <p class="font-semibold text-white">Email</p>
+                    <p class="mt-2">{{ support_email }}</p>
+                </div>
+                <div class="soft-panel">
+                    <p class="font-semibold text-white">Phone</p>
+                    <p class="mt-2">{{ support_phone }}</p>
+                </div>
+                <div class="soft-panel">
+                    <p class="font-semibold text-white">Secure Login</p>
+                    <p class="mt-2">Create your account or sign in with email and password from the authentication page.</p>
+                    <a href="{{ url_for('pages.auth_page') }}?mode=register" class="action-btn mt-4 inline-flex border border-glow/20 bg-glow/10 text-glow">Open Authentication</a>
+                </div>
+            </div>
+        </article>
+
+        <article class="glass-card p-6">
+            <p class="section-kicker">Onboarding QR</p>
+            <h2 class="text-2xl font-semibold">Scan for quick access</h2>
+            <div class="mt-5 rounded-[28px] bg-white p-5">
+                <img src="{{ url_for('pages.onboarding_qr') }}" alt="GrowFlow onboarding QR" class="mx-auto w-full max-w-[240px]" loading="lazy">
+            </div>
+        </article>
+    </div>
+</div>
+{% endblock %}

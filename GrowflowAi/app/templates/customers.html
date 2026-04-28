@@ -1,0 +1,43 @@
+{% extends "app_shell.html" %}
+{% block page_content %}
+<div class="grid gap-6 xl:grid-cols-[0.95fr_1.05fr]">
+    <div class="grid gap-6">
+        <article class="glass-card p-6">
+            <p class="section-kicker">Customer Form</p>
+            <h2 class="text-2xl font-semibold">Add or update customer records</h2>
+            <div id="customer-alert" class="mt-5 hidden rounded-2xl border px-4 py-3 text-sm"></div>
+            <form id="customer-form" class="mt-5 space-y-4">
+                <input id="customer-id" name="id" type="hidden">
+                <input id="customer-name" name="name" type="text" class="field" placeholder="Customer name" required>
+                <input id="customer-phone" name="phone" type="text" class="field" placeholder="+91 9XXXXXXXXX" required>
+                <input id="customer-email" name="email" type="email" class="field" placeholder="Optional email">
+                <div class="flex flex-wrap gap-3">
+                    <button type="submit" class="action-btn bg-glow text-ink">Save Customer</button>
+                    <button id="customer-reset-button" type="button" class="action-btn border border-white/10 bg-white/5 text-white">Reset</button>
+                </div>
+            </form>
+        </article>
+
+        <article class="glass-card p-6">
+            <p class="section-kicker">Bulk Import</p>
+            <h2 class="text-2xl font-semibold">Paste one customer per line</h2>
+            <div id="customer-import-alert" class="mt-5 hidden rounded-2xl border px-4 py-3 text-sm"></div>
+            <form id="customer-import-form" class="mt-5 space-y-4">
+                <textarea id="customer-import-contacts" name="contacts" rows="7" class="field" placeholder="Riya Traders,+919100000001,riya@example.com"></textarea>
+                <button type="submit" class="action-btn border border-glow/20 bg-glow/10 text-glow">Import Customers</button>
+            </form>
+        </article>
+    </div>
+
+    <article class="glass-card p-6">
+        <div class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+            <div>
+                <p class="section-kicker">Customer Records</p>
+                <h2 class="text-2xl font-semibold">Contacts with purchase context</h2>
+            </div>
+            <div id="customer-summary" class="chip-row"></div>
+        </div>
+        <div id="customer-record-list" class="mt-5 space-y-3"></div>
+    </article>
+</div>
+{% endblock %}

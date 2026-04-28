@@ -1,0 +1,76 @@
+{% extends "app_shell.html" %}
+{% block page_content %}
+<div class="grid gap-6 xl:grid-cols-[1.05fr_0.95fr]">
+    <article class="glass-card p-6">
+        <div class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+            <div>
+                <p class="section-kicker">Connection Vault</p>
+                <h2 class="text-2xl font-semibold">Connect a client's WhatsApp API credentials</h2>
+                <p class="mt-2 text-sm text-white/65">
+                    Save the access token, phone number ID, and business account ID securely in the backend.
+                    Free plans can store credentials, while live verification is reserved for Pro or trial access.
+                </p>
+            </div>
+            <div class="flex flex-wrap gap-3">
+                <a href="{{ url_for('pages.whatsapp_dashboard_page') }}" class="action-btn border border-glow/20 bg-glow/10 text-glow">Open Messaging Dashboard</a>
+                <a href="{{ url_for('pages.subscription_page') }}" class="action-btn border border-white/10 bg-white/5 text-white">Upgrade Plan</a>
+            </div>
+        </div>
+
+        <div id="whatsapp-summary-chips" class="chip-row mt-5"></div>
+        <div id="whatsapp-settings-alert" class="mt-5 hidden rounded-2xl border px-4 py-3 text-sm"></div>
+
+        <div class="mt-5 grid gap-4 lg:grid-cols-2">
+            <div class="soft-panel">
+                <p class="font-semibold text-white">Client-owned setup</p>
+                <p class="mt-2 text-sm leading-6 text-white/65">
+                    Credentials are encrypted server-side and never exposed to client-side JavaScript.
+                </p>
+            </div>
+            <div class="soft-panel">
+                <p class="font-semibold text-white">Connection flow</p>
+                <p class="mt-2 text-sm leading-6 text-white/65">
+                    Save first, then test the live connection when your subscription allows it.
+                </p>
+            </div>
+        </div>
+
+        <form id="whatsapp-connection-form" class="mt-5 space-y-4">
+            <input id="whatsapp-api-key" name="access_token" type="password" class="field" placeholder="Access token">
+            <input id="whatsapp-phone-number-id" name="phone_number_id" type="text" class="field" placeholder="Phone number ID">
+            <input id="whatsapp-business-account-id" name="business_account_id" type="text" class="field" placeholder="Business account ID">
+            <input id="whatsapp-verify-token" name="verify_token" type="text" class="field" placeholder="Verify token (optional)">
+            <div class="flex flex-wrap gap-3">
+                <button id="whatsapp-save-button" type="button" class="action-btn border border-white/10 bg-white/5 text-white">Save Credentials</button>
+                <button id="whatsapp-connect-button" type="button" class="action-btn bg-glow text-ink">Test Connection</button>
+                <button id="whatsapp-disconnect-button" type="button" class="action-btn border border-red-500/20 bg-red-950/30 text-red-100">Disconnect</button>
+            </div>
+        </form>
+    </article>
+
+    <article class="glass-card p-6">
+        <p class="section-kicker">Usage Notes</p>
+        <h2 class="text-2xl font-semibold">What happens after connection</h2>
+        <div class="mt-5 space-y-4">
+            <div class="soft-panel">
+                <p class="font-semibold text-white">Live verification</p>
+                <p class="mt-2 text-sm leading-6 text-white/65">
+                    The backend checks the token, phone number ID, and business account ID against Meta's WhatsApp Cloud API.
+                </p>
+            </div>
+            <div class="soft-panel">
+                <p class="font-semibold text-white">Plan gating</p>
+                <p class="mt-2 text-sm leading-6 text-white/65">
+                    Free plans stay in demo mode. Pro or trial accounts can verify and send live messages.
+                </p>
+            </div>
+            <div class="soft-panel">
+                <p class="font-semibold text-white">Support path</p>
+                <p class="mt-2 text-sm leading-6 text-white/65">
+                    If the connection fails, check the token scopes, phone number ID, and business account access in Meta Business Manager.
+                </p>
+            </div>
+        </div>
+    </article>
+</div>
+{% endblock %}

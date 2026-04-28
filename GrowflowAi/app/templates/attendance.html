@@ -1,0 +1,38 @@
+{% extends "app_shell.html" %}
+{% block page_content %}
+<div class="grid gap-6 xl:grid-cols-[0.95fr_1.05fr]">
+    <div class="grid gap-6">
+        <article class="glass-card p-6">
+            <p class="section-kicker">Date and Export</p>
+            <h2 class="text-2xl font-semibold">Filter attendance logs by day</h2>
+            <div class="mt-5 flex flex-col gap-4 md:flex-row">
+                <input id="attendance-date-filter" type="date" class="field">
+                <button id="attendance-load-button" type="button" class="action-btn bg-glow text-ink">Load Logs</button>
+                <button id="attendance-export-button" type="button" class="action-btn border border-white/10 bg-white/5 text-white">Export for Google Sheets</button>
+            </div>
+            <div id="attendance-summary" class="mt-5 chip-row"></div>
+        </article>
+
+        <article class="glass-card p-6">
+            <p class="section-kicker">Mark Attendance</p>
+            <h2 class="text-2xl font-semibold">Update employee status quickly</h2>
+            <div id="attendance-alert" class="mt-5 hidden rounded-2xl border px-4 py-3 text-sm"></div>
+            <form id="attendance-form" class="mt-5 space-y-4">
+                <select id="attendance-employee-id" name="employee_id" class="field" required></select>
+                <select id="attendance-status" name="status" class="field" required>
+                    <option value="present">Present</option>
+                    <option value="absent">Absent</option>
+                    <option value="leave">Leave</option>
+                </select>
+                <button type="submit" class="action-btn border border-glow/20 bg-glow/10 text-glow">Save Attendance</button>
+            </form>
+        </article>
+    </div>
+
+    <article class="glass-card p-6">
+        <p class="section-kicker">Attendance Logs</p>
+        <h2 class="text-2xl font-semibold">Date-based records</h2>
+        <div id="attendance-record-list" class="mt-5 space-y-3"></div>
+    </article>
+</div>
+{% endblock %}

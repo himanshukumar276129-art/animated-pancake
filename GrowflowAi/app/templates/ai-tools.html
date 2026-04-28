@@ -1,0 +1,61 @@
+{% extends "app_shell.html" %}
+{% block page_content %}
+<div class="grid gap-6 xl:grid-cols-[0.9fr_1.1fr]">
+    <article class="glass-card p-6">
+        <div class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+            <div>
+                <p class="section-kicker">AI Provider</p>
+                <h2 class="text-2xl font-semibold">Groq-backed content generation</h2>
+            </div>
+            <div class="chip-row">
+                <span id="ai-provider-status" class="mini-chip">Status pending</span>
+                <span id="ai-provider-source" class="mini-chip">Source pending</span>
+            </div>
+        </div>
+        <div id="ai-provider-note" class="mt-5 rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/70">
+            Connect your Groq API key in API Settings. The backend keeps the key server-side and only sends prompts from Flask.
+        </div>
+        <div class="mt-4 flex flex-wrap gap-3">
+            <a href="{{ url_for('pages.api_settings_page') }}" class="action-btn border border-glow/20 bg-glow/10 text-glow">Manage API Key</a>
+            <button id="ai-refresh-status" type="button" class="action-btn border border-white/10 bg-white/5 text-white">Refresh Status</button>
+        </div>
+
+        <p class="section-kicker">Quick Generators</p>
+        <h2 class="text-2xl font-semibold">One-click ideas for local campaigns</h2>
+        <div class="mt-5 quick-grid">
+            <button type="button" class="template-btn" data-ai-prompt="Create a Diwali poster headline and offer for a local retail business." data-ai-type="poster">
+                <p class="template-title">Diwali Poster</p>
+                <p class="template-copy">Generate a festive poster concept with headline and CTA.</p>
+            </button>
+            <button type="button" class="template-btn" data-ai-prompt="Write a short WhatsApp caption for a weekend sale at a local business." data-ai-type="caption">
+                <p class="template-title">Weekend Caption</p>
+                <p class="template-copy">Short campaign copy for social and WhatsApp use.</p>
+            </button>
+            <button type="button" class="template-btn" data-ai-prompt="Create an offer message for repeat customers with a friendly tone and clear call to action." data-ai-type="marketing">
+                <p class="template-title">Offer Message</p>
+                <p class="template-copy">Promotion-ready copy for repeat sales.</p>
+            </button>
+        </div>
+    </article>
+
+    <article class="glass-card p-6">
+        <p class="section-kicker">Custom AI Request</p>
+        <h2 class="text-2xl font-semibold">Generate posters, captions, and messages</h2>
+        <div id="ai-alert" class="mt-5 hidden rounded-2xl border px-4 py-3 text-sm"></div>
+        <form id="ai-generate-form" class="mt-5 space-y-4">
+            <input id="ai-business-name" name="business_name" type="text" class="field" placeholder="Business name (optional)">
+            <select id="ai-content-type" name="type" class="field">
+                <option value="poster">Poster</option>
+                <option value="caption">Caption</option>
+                <option value="marketing">Offer message</option>
+            </select>
+            <textarea id="ai-prompt" name="prompt" rows="6" class="field" placeholder="Describe the campaign, product, event, or tone"></textarea>
+            <button type="submit" class="action-btn bg-glow text-ink">Generate with AI</button>
+        </form>
+        <div id="ai-output" class="mt-5 rounded-[24px] border border-white/10 bg-black/20 p-4 text-sm leading-7 text-white/75">
+            Your AI output will appear here.
+        </div>
+        <div id="ai-poster-preview" class="mt-5 hidden rounded-[24px] border border-white/10 bg-white p-4 text-ink"></div>
+    </article>
+</div>
+{% endblock %}

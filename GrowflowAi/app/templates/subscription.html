@@ -1,0 +1,52 @@
+{% extends "app_shell.html" %}
+{% block page_content %}
+<div class="grid gap-6 xl:grid-cols-[1.02fr_0.98fr]">
+    <article class="glass-card p-6">
+        <p class="section-kicker">Trial Status</p>
+        <h2 class="text-2xl font-semibold">Keep premium access active.</h2>
+        <div id="subscription-alert" class="mt-5 hidden rounded-2xl border px-4 py-3 text-sm"></div>
+        <div id="subscription-current-summary" class="mt-5"></div>
+        <div id="subscription-quote-summary" class="mt-5"></div>
+        <div class="mt-6 grid gap-4 md:grid-cols-2">
+            <div class="plan-card">
+                <p class="text-sm text-white/55">7-Day Free Trial</p>
+                <p class="mt-3 text-3xl font-semibold">Rs 0</p>
+                <p class="mt-2 text-sm text-white/65">Live WhatsApp, AI, analytics, and exports during the trial window</p>
+                <ul class="mt-4 space-y-2 text-sm text-white/70">
+                    <li>Basic dashboard access</li>
+                    <li>WhatsApp demo and live preview</li>
+                    <li>Limited AI tools for quick campaigns</li>
+                </ul>
+            </div>
+            <div class="plan-card is-featured">
+                <p class="text-sm text-white/55">Pro Plan</p>
+                <p class="mt-3 text-3xl font-semibold">Rs 200</p>
+                <p class="mt-2 text-sm text-white/65">Monthly billing with full automation and live messaging</p>
+                <ul class="mt-4 space-y-2 text-sm text-white/70">
+                    <li>Unlimited WhatsApp live campaigns</li>
+                    <li>Advanced automation and reminders</li>
+                    <li>Full AI tools, analytics, and exports</li>
+                </ul>
+            </div>
+        </div>
+    </article>
+
+    <article class="glass-card p-6">
+        <p class="section-kicker">Promo & Payment</p>
+        <h2 class="text-2xl font-semibold">Apply a promo code and upgrade.</h2>
+        <form id="subscription-promo-form" class="mt-5 space-y-3">
+            <input id="subscription-promo-code" name="promo_code" type="text" class="field" placeholder="Enter promo code">
+            <button id="subscription-apply-promo" type="submit" class="action-btn border border-glow/20 bg-glow/10 text-glow">Apply promo code</button>
+        </form>
+        <div id="subscription-payment-summary" class="mt-5"></div>
+        <button id="subscription-payment-button" type="button" class="action-btn mt-5 bg-glow text-ink">Upgrade now</button>
+        <p id="subscription-payment-note" class="mt-3 text-xs text-white/50">Secure checkout is handled on the server. Payment confirmation unlocks Pro features immediately.</p>
+    </article>
+</div>
+
+<article class="glass-card mt-6 p-6">
+    <p class="section-kicker">Billing History</p>
+    <h2 class="text-2xl font-semibold">Recent subscription activity</h2>
+    <div id="subscription-history-list" class="mt-5 space-y-3"></div>
+</article>
+{% endblock %}

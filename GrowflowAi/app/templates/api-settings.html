@@ -1,0 +1,45 @@
+{% extends "app_shell.html" %}
+{% block page_content %}
+<div class="grid gap-6 xl:grid-cols-[0.95fr_1.05fr]">
+    <article class="glass-card p-6">
+        <div class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+            <div>
+                <p class="section-kicker">Groq API Management</p>
+                <h2 class="text-2xl font-semibold">Secure external AI credentials</h2>
+            </div>
+            <div class="chip-row">
+                <span id="api-management-status" class="mini-chip">Status pending</span>
+                <span id="api-management-source" class="mini-chip">Source pending</span>
+                <span id="api-management-model-chip" class="mini-chip">Model pending</span>
+            </div>
+        </div>
+        <div id="api-management-mask" class="mt-5 rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/70">
+            The active Groq key stays encrypted in the database or in your `.env` file. Nothing is exposed to the frontend.
+        </div>
+        <div id="api-management-alert" class="mt-5 hidden rounded-2xl border px-4 py-3 text-sm"></div>
+        <form id="api-management-form" class="mt-5 space-y-4">
+            <input id="api-management-key" name="api_key" type="password" class="field" placeholder="Paste Groq API key or leave blank to use GROQ_API_KEY">
+            <input id="api-management-model" name="model" type="text" class="field" placeholder="Groq model (default: llama-3.3-70b-versatile)">
+            <label class="settings-toggle">
+                <span>Verify connection after save</span>
+                <input id="api-management-verify" name="verify" type="checkbox" class="h-4 w-4 accent-[#49f27a]" checked>
+            </label>
+            <div class="flex flex-wrap gap-3">
+                <button id="api-management-save" type="submit" class="action-btn bg-glow text-ink">Connect / Update API</button>
+                <button id="api-management-test" type="button" class="action-btn border border-white/10 bg-white/5 text-white">Test Current API</button>
+                <button id="api-management-clear" type="button" class="action-btn border border-red-500/20 bg-red-950/30 text-red-100">Remove Groq Key</button>
+            </div>
+        </form>
+        <div class="mt-6 soft-panel">
+            <p class="font-semibold text-white">Support keys</p>
+            <p class="mt-2 text-sm text-white/65">Other encrypted keys stay available below for WhatsApp, payment, and email integrations.</p>
+        </div>
+    </article>
+
+    <article class="glass-card p-6">
+        <p class="section-kicker">Saved Keys</p>
+        <h2 class="text-2xl font-semibold">Masked credentials and status</h2>
+        <div id="api-management-list" class="mt-5 space-y-3"></div>
+    </article>
+</div>
+{% endblock %}

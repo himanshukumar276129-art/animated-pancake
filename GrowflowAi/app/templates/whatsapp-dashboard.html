@@ -1,0 +1,82 @@
+{% extends "app_shell.html" %}
+{% block page_content %}
+<div class="grid gap-6 xl:grid-cols-[0.95fr_1.05fr]">
+    <article class="glass-card p-6">
+        <div class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+            <div>
+                <p class="section-kicker">Messaging Hub</p>
+                <h2 class="text-2xl font-semibold">Send WhatsApp campaigns, reminders, and invoices</h2>
+                <p class="mt-2 text-sm text-white/65">
+                    Use templates, scheduled delivery, and customer selection without exposing client credentials.
+                </p>
+            </div>
+            <div class="flex flex-wrap gap-3">
+                <a href="{{ url_for('pages.whatsapp_settings_page') }}" class="action-btn border border-glow/20 bg-glow/10 text-glow">Open Settings</a>
+                <a href="{{ url_for('pages.whatsapp_page') }}" class="action-btn border border-white/10 bg-white/5 text-white">Open Hub</a>
+            </div>
+        </div>
+
+        <div id="whatsapp-summary-chips" class="chip-row mt-5"></div>
+        <div id="whatsapp-send-alert" class="mt-5 hidden rounded-2xl border px-4 py-3 text-sm"></div>
+
+        <form id="whatsapp-send-form" class="mt-5 space-y-4">
+            <select id="whatsapp-send-mode" name="send_to" class="field">
+                <option value="selected_customers">Selected customers</option>
+                <option value="all_customers">All customers</option>
+                <option value="single_customer">One customer</option>
+                <option value="manual_number">Manual number</option>
+            </select>
+            <div id="whatsapp-send-selected-wrap">
+                <select id="whatsapp-send-customers" name="customer_ids" class="field" multiple size="6"></select>
+            </div>
+            <div id="whatsapp-send-single-wrap" class="hidden">
+                <select id="whatsapp-send-single" name="customer_id" class="field"></select>
+            </div>
+            <div id="whatsapp-send-manual-wrap" class="hidden">
+                <input id="whatsapp-send-manual" name="customer_phone_number" type="text" class="field" placeholder="+91 9XXXXXXXXX">
+            </div>
+            <select id="whatsapp-template-select" name="template_selection" class="field"></select>
+            <select id="whatsapp-message-type" name="message_type" class="field">
+                <option value="promotional">Promotional</option>
+                <option value="reminder">Reminder</option>
+                <option value="invoice">Invoice</option>
+                <option value="welcome">Welcome</option>
+                <option value="text">Text</option>
+            </select>
+            <select id="whatsapp-delivery-mode" name="mode" class="field">
+                <option value="auto">Auto</option>
+                <option value="demo">Demo</option>
+                <option value="live">Live</option>
+            </select>
+            <input id="whatsapp-scheduled-for" name="scheduled_for" type="datetime-local" class="field">
+            <textarea id="whatsapp-message-content" name="message_content" rows="6" class="field" placeholder="Write your message or choose a template"></textarea>
+            <button type="submit" class="action-btn border border-glow/20 bg-glow/10 text-glow">Send or Schedule</button>
+        </form>
+    </article>
+
+    <div class="grid gap-6">
+        <article class="glass-card p-6">
+            <p class="section-kicker">Template Library</p>
+            <h2 class="text-2xl font-semibold">Built-in and custom WhatsApp templates</h2>
+            <div id="whatsapp-template-alert" class="mt-5 hidden rounded-2xl border px-4 py-3 text-sm"></div>
+            <form id="whatsapp-template-form" class="mt-5 space-y-4">
+                <input id="whatsapp-template-id" name="id" type="hidden">
+                <input id="whatsapp-template-name" name="template_name" type="text" class="field" placeholder="Template name" required>
+                <input id="whatsapp-template-category" name="category" type="text" class="field" placeholder="Category" required>
+                <textarea id="whatsapp-template-content" name="content" rows="4" class="field" placeholder="Template content" required></textarea>
+                <div class="flex flex-wrap gap-3">
+                    <button type="submit" class="action-btn bg-glow text-ink">Save Template</button>
+                    <button id="whatsapp-template-reset" type="button" class="action-btn border border-white/10 bg-white/5 text-white">Reset</button>
+                </div>
+            </form>
+            <div id="whatsapp-template-library" class="mt-6 space-y-3"></div>
+        </article>
+
+        <article class="glass-card p-6">
+            <p class="section-kicker">Automation Logs</p>
+            <h2 class="text-2xl font-semibold">Recent message activity</h2>
+            <div id="whatsapp-log-list" class="mt-5 space-y-3"></div>
+        </article>
+    </div>
+</div>
+{% endblock %}

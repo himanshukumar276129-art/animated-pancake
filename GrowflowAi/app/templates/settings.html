@@ -1,0 +1,101 @@
+{% extends "app_shell.html" %}
+{% block page_content %}
+<div class="grid gap-6 xl:grid-cols-[1fr_0.95fr]">
+    <div class="grid gap-6">
+        <article class="glass-card p-6">
+            <p class="section-kicker">Account Settings</p>
+            <h2 class="text-2xl font-semibold">Profile and business identity</h2>
+            <div id="settings-account-alert" class="mt-5 hidden rounded-2xl border px-4 py-3 text-sm"></div>
+            <form id="settings-account-form" class="mt-5 space-y-4">
+                <input id="settings-account-name" name="name" type="text" class="field" placeholder="Owner name" required>
+                <input id="settings-account-email" name="email" type="email" class="field" placeholder="Email address" required>
+                <input id="settings-account-phone" name="phone_number" type="text" class="field" placeholder="Phone with country code">
+                <input id="settings-account-business" name="business_name" type="text" class="field" placeholder="Business name">
+                <button type="submit" class="action-btn bg-glow text-ink">Save Account</button>
+            </form>
+        </article>
+
+        <article class="glass-card p-6">
+            <p class="section-kicker">Preferences</p>
+            <h2 class="text-2xl font-semibold">Theme, language, and notifications</h2>
+            <div id="settings-preferences-alert" class="mt-5 hidden rounded-2xl border px-4 py-3 text-sm"></div>
+            <form id="settings-preferences-form" class="mt-5 space-y-4">
+                <label class="settings-toggle">
+                    <span>Email notifications</span>
+                    <input id="settings-email-notifications" type="checkbox" class="h-4 w-4 accent-[#49f27a]">
+                </label>
+                <label class="settings-toggle">
+                    <span>WhatsApp notifications</span>
+                    <input id="settings-whatsapp-notifications" type="checkbox" class="h-4 w-4 accent-[#49f27a]">
+                </label>
+                <label class="settings-toggle">
+                    <span>SMS alerts</span>
+                    <input id="settings-sms-alerts" type="checkbox" class="h-4 w-4 accent-[#49f27a]">
+                </label>
+                <select id="settings-theme" class="field">
+                    <option value="dark">Dark</option>
+                    <option value="light">Light</option>
+                </select>
+                <select id="settings-language" class="field">
+                    <option value="english">English</option>
+                    <option value="hindi">Hindi</option>
+                </select>
+                <button type="submit" class="action-btn border border-glow/20 bg-glow/10 text-glow">Save Preferences</button>
+            </form>
+        </article>
+    </div>
+
+    <div class="grid gap-6">
+        <article class="glass-card p-6">
+            <p class="section-kicker">Security</p>
+            <h2 class="text-2xl font-semibold">Password and session controls</h2>
+            <div id="settings-security-alert" class="mt-5 hidden rounded-2xl border px-4 py-3 text-sm"></div>
+            <form id="settings-security-form" class="mt-5 space-y-4">
+                <input name="current_password" type="password" class="field" placeholder="Current password" required>
+                <input name="new_password" type="password" class="field" placeholder="New password" required>
+                <button type="submit" class="action-btn bg-glow text-ink">Change Password</button>
+            </form>
+            <div class="mt-6 space-y-4">
+                <label class="settings-toggle">
+                    <span>Two-factor preference</span>
+                    <input id="settings-two-factor" type="checkbox" class="h-4 w-4 accent-[#49f27a]">
+                </label>
+                <div class="flex flex-wrap gap-3">
+                    <button id="settings-save-2fa" type="button" class="action-btn border border-glow/20 bg-glow/10 text-glow">Save 2FA Preference</button>
+                    <button id="settings-logout-all" type="button" class="action-btn border border-white/10 bg-white/5 text-white">Logout All Devices</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="glass-card p-6">
+            <p class="section-kicker">Auth and Summary</p>
+            <h2 class="text-2xl font-semibold">Authentication support</h2>
+            <div id="settings-auth-summary" class="mt-5 space-y-3"></div>
+            <div id="settings-security-summary" class="mt-5 space-y-3"></div>
+            <button id="settings-password-reset" type="button" class="action-btn mt-5 border border-white/10 bg-white/5 text-white">Request Password Reset</button>
+        </article>
+
+        <article class="glass-card p-6">
+            <p class="section-kicker">PWA Access</p>
+            <h2 class="text-2xl font-semibold">Install and offline controls</h2>
+            <p class="mt-4 text-sm leading-6 text-white/68">
+                GrowFlow AI is installable on Android, iPhone, tablets, laptops, and desktops. Cached pages keep the
+                last synced workspace available when the network drops.
+            </p>
+            <div class="mt-5 grid gap-3 sm:grid-cols-2">
+                <button type="button" data-pwa-action="install" hidden class="action-btn bg-glow text-ink">Install app</button>
+                <button type="button" data-pwa-action="notifications" class="action-btn border border-white/10 bg-white/5 text-white">Enable alerts</button>
+            </div>
+            <div class="mt-5 grid gap-3">
+                <div class="soft-panel text-sm leading-6 text-white/65">
+                    Offline basic mode keeps the dashboard, lists, and subscription state readable from the last synced
+                    data until the connection returns.
+                </div>
+                <div class="soft-panel text-sm leading-6 text-white/65">
+                    On iPhone Safari, open Share and choose Add to Home Screen if the install button does not appear.
+                </div>
+            </div>
+        </article>
+    </div>
+</div>
+{% endblock %}
