@@ -1,11 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "flask",
-  "cleanUrls": true,
-  "functions": {
-    "app.py": {
-      "maxDuration": 30,
-      "excludeFiles": "{.venv/**,__pycache__/**,**/__pycache__/**,growflow.db,.env,.env.*}"
-    }
-  }
+  "cleanUrls": true
 }
